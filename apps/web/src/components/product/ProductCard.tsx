@@ -66,24 +66,24 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
 
-      <div className="p-5 flex flex-col flex-1">
-        <div className="mb-2">
-          <span className="text-xs font-semibold text-blue-300 uppercase tracking-wider">
+      <div className="p-3 sm:p-5 flex flex-col flex-1">
+        <div className="mb-1 sm:mb-2">
+          <span className="text-[10px] sm:text-xs font-semibold text-blue-300 uppercase tracking-wider">
             {product.category?.name || 'Category'}
           </span>
         </div>
-        <h3 className="text-white font-semibold text-lg line-clamp-2 leading-tight mb-2 flex-1">
+        <h3 className="text-white font-semibold text-sm sm:text-lg line-clamp-2 leading-tight mb-2 flex-1">
           {product.title}
         </h3>
         
-        <div className="mt-auto flex items-end justify-between pt-4 gap-2">
+        <div className="mt-auto flex items-end justify-between pt-2 sm:pt-4 gap-1 sm:gap-2">
           <div className="flex-1">
             {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
-              <p className="text-sm text-gray-300 line-through mb-1">
+              <p className="text-xs sm:text-sm text-gray-300 line-through mb-0.5 sm:mb-1">
                 ${Number(product.compareAtPrice).toFixed(2)}
               </p>
             )}
-            <p className="text-xl font-bold text-white">
+            <p className="text-base sm:text-xl font-bold text-white">
               ${Number(product.price).toFixed(2)}
             </p>
           </div>
@@ -98,7 +98,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               }
             }}
             disabled={outOfStock}
-            className={`px-3 h-10 rounded-xl text-sm font-bold flex items-center justify-center shadow-sm transition-transform active:scale-95
+            className={`hidden sm:flex px-3 h-10 rounded-xl text-sm font-bold items-center justify-center shadow-sm transition-transform active:scale-95
               ${outOfStock ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-[#E5E0D8] text-gray-800 hover:bg-[#D5CFC4]'}
             `}
           >
@@ -108,11 +108,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           <button 
             onClick={handleAddToCart}
             disabled={outOfStock}
-            className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-md transition-transform active:scale-95 flex-shrink-0
+            className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shadow-md transition-transform active:scale-95 flex-shrink-0
               ${outOfStock ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-900 text-white hover:bg-gray-800 hover:shadow-gray-900/25'}
             `}
           >
-            <ShoppingCart className="w-4 h-4" />
+            <ShoppingCart className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
       </div>

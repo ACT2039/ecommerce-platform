@@ -99,6 +99,9 @@ export default function ProductDetailPage() {
             <img 
               src={imageUrl} 
               alt={product.title}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200&auto=format&fit=crop';
+              }}
               className="w-full h-full object-cover object-center"
             />
             {outOfStock && (

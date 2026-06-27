@@ -4,7 +4,8 @@
     "outDir": "dist",
     "module": "commonjs",
     "rootDir": "src",
-    "types": ["node", "jest"]
+    "types": ["node", "jest"],
+    "ignoreDeprecations": "5.0"
   },
   "include": ["src/**/*"]
 }

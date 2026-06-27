@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { CartProvider } from '@/contexts/CartContext';
@@ -23,7 +24,9 @@ export default function RootLayout({
         <AuthProvider>
           <CartProvider>
             <WishlistProvider>
-              <Navbar />
+              <Suspense fallback={<div className="h-16 w-full glass-nav" />}>
+                <Navbar />
+              </Suspense>
               <main className="flex-1 w-full">
                 {children}
               </main>

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { useWishlist } from '@/contexts/WishlistContext';
@@ -12,6 +12,8 @@ import { useState } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentCategory = searchParams?.get('category');
   const { user, logout } = useAuth();
   const { cart } = useCart();
   const { wishlist } = useWishlist();
@@ -145,12 +147,57 @@ export default function Navbar() {
 
       {/* Sub-navbar (Categories) */}
       <div className="glass text-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-12 gap-6 overflow-x-auto whitespace-nowrap text-white/80 scrollbar-hide">
-          <Link href="/products" className="font-medium hover:text-white border-b-2 border-transparent hover:border-gray-400 py-1 transition-colors">All Products</Link>
-          <Link href="/products?category=electronics" className="hover:text-white py-1">Electronics</Link>
-          <Link href="/products?category=mens-fashion" className="hover:text-white py-1">Clothing</Link>
-          <Link href="/products?category=home-living" className="hover:text-white py-1">Home & Kitchen</Link>
-          <Link href="/deals" className="text-emerald-400 font-bold py-1">Today's Deals</Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-12 gap-2 overflow-x-auto whitespace-nowrap text-white/80 scrollbar-hide">
+          <Link 
+            href="/products" 
+            className={`px-3 py-1.5 rounded-lg transition-colors ${
+              pathname === '/products' && !currentCategory 
+                ? 'bg-white/20 text-white font-bold' 
+                : 'hover:bg-white/10 hover:text-white font-medium'
+            }`}
+          >
+            All Products
+          </Link>
+          <Link 
+            href="/products?category=electronics" 
+            className={`px-3 py-1.5 rounded-lg transition-colors ${
+              currentCategory === 'electronics' 
+                ? 'bg-white/20 text-white font-bold' 
+                : 'hover:bg-white/10 hover:text-white'
+            }`}
+          >
+            Electronics
+          </Link>
+          <Link 
+            href="/products?category=mens-fashion" 
+            className={`px-3 py-1.5 rounded-lg transition-colors ${
+              currentCategory === 'mens-fashion' 
+                ? 'bg-white/20 text-white font-bold' 
+                : 'hover:bg-white/10 hover:text-white'
+            }`}
+          >
+            Clothing
+          </Link>
+          <Link 
+            href="/products?category=home-living" 
+            className={`px-3 py-1.5 rounded-lg transition-colors ${
+              currentCategory === 'home-living' 
+                ? 'bg-white/20 text-white font-bold' 
+                : 'hover:bg-white/10 hover:text-white'
+            }`}
+          >
+            Home & Kitchen
+          </Link>
+          <Link 
+            href="/deals" 
+            className={`px-3 py-1.5 rounded-lg transition-colors ml-2 ${
+              pathname === '/deals' 
+                ? 'bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30' 
+                : 'text-emerald-400 font-bold hover:bg-emerald-500/10'
+            }`}
+          >
+            Today's Deals
+          </Link>
         </div>
       </div>
 
@@ -207,13 +254,63 @@ export default function Navbar() {
         </div>
 
         {/* Categories Section */}
-        <div className="flex flex-col gap-3 py-2">
-          <h3 className="text-xs uppercase tracking-wider text-gray-500 font-bold mb-1">Categories</h3>
-          <Link href="/products" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1.5">All Products</Link>
-          <Link href="/products?category=electronics" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1.5">Electronics</Link>
-          <Link href="/products?category=mens-fashion" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1.5">Clothing</Link>
-          <Link href="/products?category=home-living" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1.5">Home & Kitchen</Link>
-          <Link href="/deals" onClick={() => setIsMenuOpen(false)} className="text-emerald-400 hover:text-emerald-300 py-1.5 font-bold mt-2">Today's Deals</Link>
+        <div className="flex flex-col gap-2 py-2">
+          <h3 className="text-xs uppercase tracking-wider text-gray-500 font-bold mb-1 px-3">Categories</h3>
+          <Link 
+            href="/products" 
+            onClick={() => setIsMenuOpen(false)} 
+            className={`px-3 py-2 rounded-lg transition-colors ${
+              pathname === '/products' && !currentCategory 
+                ? 'bg-white/10 text-white font-bold' 
+                : 'text-gray-300 hover:bg-white/5 hover:text-white'
+            }`}
+          >
+            All Products
+          </Link>
+          <Link 
+            href="/products?category=electronics" 
+            onClick={() => setIsMenuOpen(false)} 
+            className={`px-3 py-2 rounded-lg transition-colors ${
+              currentCategory === 'electronics' 
+                ? 'bg-white/10 text-white font-bold' 
+                : 'text-gray-300 hover:bg-white/5 hover:text-white'
+            }`}
+          >
+            Electronics
+          </Link>
+          <Link 
+            href="/products?category=mens-fashion" 
+            onClick={() => setIsMenuOpen(false)} 
+            className={`px-3 py-2 rounded-lg transition-colors ${
+              currentCategory === 'mens-fashion' 
+                ? 'bg-white/10 text-white font-bold' 
+                : 'text-gray-300 hover:bg-white/5 hover:text-white'
+            }`}
+          >
+            Clothing
+          </Link>
+          <Link 
+            href="/products?category=home-living" 
+            onClick={() => setIsMenuOpen(false)} 
+            className={`px-3 py-2 rounded-lg transition-colors ${
+              currentCategory === 'home-living' 
+                ? 'bg-white/10 text-white font-bold' 
+                : 'text-gray-300 hover:bg-white/5 hover:text-white'
+            }`}
+          >
+            Home & Kitchen
+          </Link>
+          <Link 
+            href="/deals" 
+            onClick={() => setIsMenuOpen(false)} 
+            className={`px-3 py-2 rounded-lg transition-colors mt-2 ${
+              pathname === '/deals' 
+                ? 'bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30' 
+                : 'text-emerald-400 font-bold hover:bg-emerald-500/10'
+            }`}
+          >
+            Today's Deals
+          </Link>
         </div>
       </div>
     </header>

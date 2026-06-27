@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import healthController from '../controllers/healthController';
+import healthCheck, { seedDatabase } from '../controllers/healthController';
 import authRoutes from './auth.routes';
 import userRoutes from './user.routes';
 import addressRoutes from './address.routes';
@@ -15,8 +15,9 @@ import adminRoutes from './admin.routes';
 
 const router = Router();
 
-// Health check
-router.get('/health', healthController);
+// Health check & Seeding
+router.get('/health', healthCheck);
+router.post('/seed', seedDatabase);
 
 // Global Admin Routes
 router.use('/admin', adminRoutes);

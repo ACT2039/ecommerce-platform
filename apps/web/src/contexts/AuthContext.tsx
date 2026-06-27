@@ -35,8 +35,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const accessToken = authTokens.getAccessToken();
         if (accessToken) {
           // Try to fetch current user
-          const response = await apiClient.get<User>('/api/auth/me');
-          setUser(response.data);
+          const response = await apiClient.get<any>('/api/users/profile');
+          setUser(response.data?.data?.user || response.data);
         }
       } catch (err) {
         // Token is invalid or expired, clear it
@@ -115,9 +115,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const fetchCurrentUser = useCallback(async (): Promise<User> => {
     try {
       setError(null);
-      const response = await apiClient.get<User>('/api/auth/me');
-      setUser(response.data);
-      return response.data;
+      const response = await apiClient.get<any>('/api/users/profile');
+      const userData = response.data?.data?.user || response.data;
+      setUser(userData);
+      return userData;
     } catch (err: any) {
       const message = err.response?.data?.message || 'Failed to fetch user';
       setError(message);

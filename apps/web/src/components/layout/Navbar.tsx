@@ -130,6 +130,67 @@ export default function Navbar() {
           <Link href="/deals" className="text-white font-medium p-1">Today's Deals</Link>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="lg:hidden absolute top-16 left-0 w-full bg-gray-900 border-t border-white/10 shadow-2xl p-4 flex flex-col gap-4">
+          {/* Mobile Search */}
+          <form 
+            className="flex relative w-full mb-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const formData = new FormData(e.currentTarget);
+              const query = formData.get('search');
+              if (query) {
+                window.location.href = `/products?search=${encodeURIComponent(query.toString())}`;
+                setIsMenuOpen(false);
+              }
+            }}
+          >
+            <input 
+              name="search"
+              type="text" 
+              placeholder="Search products..."
+              className="w-full pl-4 pr-10 py-2.5 rounded-l-xl text-white bg-white/10 placeholder-gray-300 focus:outline-none border border-white/20 focus:border-emerald-400 focus:bg-white/20 transition-all backdrop-blur-md"
+            />
+            <button type="submit" className="bg-emerald-500/20 hover:bg-emerald-500/40 border border-l-0 border-emerald-500/30 px-4 rounded-r-xl transition-colors flex items-center justify-center backdrop-blur-md text-emerald-400">
+              <Search className="w-5 h-5" />
+            </button>
+          </form>
+
+          {/* User Section */}
+          <div className="flex flex-col gap-3 py-3 border-b border-white/10">
+            <h3 className="text-xs uppercase tracking-wider text-gray-500 font-bold mb-1">My Account</h3>
+            {user ? (
+              <>
+                <div className="flex items-center gap-2 mb-2">
+                  <User className="w-5 h-5 text-emerald-400" />
+                  <span className="font-bold text-white">{user.name}</span>
+                </div>
+                <Link href="/profile" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1">Account & Lists</Link>
+                <Link href="/profile?tab=orders" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1">My Orders</Link>
+                <Link href="/profile?tab=addresses" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1">My Addresses</Link>
+                {user.role === 'ADMIN' && (
+                  <Link href="/admin" onClick={() => setIsMenuOpen(false)} className="text-emerald-400 hover:text-emerald-300 py-1 font-bold">Admin Dashboard</Link>
+                )}
+                <button onClick={() => { logout(); setIsMenuOpen(false); }} className="text-left text-gray-400 hover:text-white py-1 mt-2">Sign Out</button>
+              </>
+            ) : (
+              <Link href="/login" onClick={() => setIsMenuOpen(false)} className="text-white hover:text-emerald-300 py-1 font-bold">Sign In / Register</Link>
+            )}
+          </div>
+
+          {/* Categories Section */}
+          <div className="flex flex-col gap-3 py-3">
+            <h3 className="text-xs uppercase tracking-wider text-gray-500 font-bold mb-1">Categories</h3>
+            <Link href="/products" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1">All Products</Link>
+            <Link href="/products?category=electronics" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1">Electronics</Link>
+            <Link href="/products?category=mens-fashion" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1">Clothing</Link>
+            <Link href="/products?category=home-living" onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white py-1">Home & Kitchen</Link>
+            <Link href="/deals" onClick={() => setIsMenuOpen(false)} className="text-emerald-400 hover:text-emerald-300 py-1 font-bold">Today's Deals</Link>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

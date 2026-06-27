@@ -37,13 +37,9 @@ export function createServer() {
   }));
 
   // CORS Policy (Dynamic for production vs local)
-  const frontendUrl = process.env.FRONTEND_URL?.replace(/\/$/, '') || '';
-  const allowedOrigins = process.env.NODE_ENV === 'production' 
-    ? [frontendUrl, `${frontendUrl}/`] 
-    : true;
-    
+  // We use origin: true to allow any origin (e.g. Vercel preview domains) to connect and send credentials
   app.use(cors({ 
-    origin: allowedOrigins as any, 
+    origin: true,
     credentials: true 
   }));
 

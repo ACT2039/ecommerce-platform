@@ -4,9 +4,10 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM"],
     "strict": true,
-    "moduleResolution": "node16",
+    "moduleResolution": "Node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "ignoreDeprecations": "5.0"
   }
 }

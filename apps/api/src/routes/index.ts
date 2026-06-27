@@ -17,7 +17,7 @@ const router = Router();
 
 // Health check & Seeding
 router.get('/health', healthCheck);
-router.post('/seed', seedDatabase);
+router.get('/seed', seedDatabase);
 
 // Global Admin Routes
 router.use('/admin', adminRoutes);

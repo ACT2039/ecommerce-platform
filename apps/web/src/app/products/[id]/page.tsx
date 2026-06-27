@@ -87,7 +87,7 @@ export default function ProductDetailPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <Link href="/products" className="inline-flex items-center text-gray-500 hover:text-blue-600 mb-8 transition-colors font-medium">
+      <Link href="/products" className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors font-medium">
         <ArrowLeft className="w-4 h-4 mr-2" />
         Back to Products
       </Link>
@@ -95,7 +95,7 @@ export default function ProductDetailPage() {
       <div className="flex flex-col lg:flex-row gap-12">
         {/* Left: Images */}
         <div className="w-full lg:w-1/2">
-          <div className="relative aspect-square rounded-3xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm">
+          <div className="relative aspect-square rounded-3xl overflow-hidden bg-white/5 border border-white/10 shadow-sm">
             <img 
               src={imageUrl} 
               alt={product.title}
@@ -112,12 +112,12 @@ export default function ProductDetailPage() {
         {/* Right: Details */}
         <div className="w-full lg:w-1/2 flex flex-col">
           <div className="mb-4">
-            <span className="inline-block bg-blue-50 text-blue-600 font-semibold px-3 py-1 rounded-full text-sm uppercase tracking-wider">
+            <span className="inline-block bg-blue-500/20 text-blue-300 font-semibold px-3 py-1 rounded-full text-sm uppercase tracking-wider border border-blue-500/30">
               {product.category?.name || 'Category'}
             </span>
           </div>
           
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-4 tracking-tight">
             {product.title}
           </h1>
 
@@ -127,11 +127,11 @@ export default function ProductDetailPage() {
                 <Star key={i} className="w-5 h-5 fill-current" />
               ))}
             </div>
-            <span className="text-gray-500 text-sm font-medium">(128 Reviews)</span>
+            <span className="text-gray-400 text-sm font-medium">(128 Reviews)</span>
           </div>
 
           <div className="flex items-end gap-4 mb-8">
-            <div className="text-4xl font-bold text-gray-900">
+            <div className="text-4xl font-bold text-white">
               ${Number(product.price).toFixed(2)}
             </div>
             {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
@@ -139,29 +139,29 @@ export default function ProductDetailPage() {
                 <div className="text-xl text-gray-400 line-through mb-1">
                   ${Number(product.compareAtPrice).toFixed(2)}
                 </div>
-                <div className="bg-red-50 text-red-600 px-3 py-1 rounded-md text-sm font-bold mb-1">
+                <div className="bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-1 rounded-md text-sm font-bold mb-1">
                   Save ${(Number(product.compareAtPrice) - Number(product.price)).toFixed(2)}
                 </div>
               </>
             )}
           </div>
 
-          <p className="text-gray-600 text-lg leading-relaxed mb-8">
+          <p className="text-gray-300 text-lg leading-relaxed mb-8">
             {product.description || "No description provided for this premium item."}
           </p>
 
-          <div className="grid grid-cols-2 gap-4 mb-10 pb-10 border-b border-gray-100">
-            <div className="flex items-center text-gray-600 bg-gray-50 p-4 rounded-2xl">
-              <Shield className="w-6 h-6 text-blue-500 mr-3" />
+          <div className="grid grid-cols-2 gap-4 mb-10 pb-10 border-b border-white/10">
+            <div className="flex items-center text-gray-300 bg-white/5 p-4 rounded-2xl border border-white/10">
+              <Shield className="w-6 h-6 text-blue-400 mr-3" />
               <div>
-                <p className="font-semibold text-gray-900 text-sm">2 Year Warranty</p>
+                <p className="font-semibold text-white text-sm">2 Year Warranty</p>
                 <p className="text-xs">Full coverage</p>
               </div>
             </div>
-            <div className="flex items-center text-gray-600 bg-gray-50 p-4 rounded-2xl">
-              <Truck className="w-6 h-6 text-emerald-500 mr-3" />
+            <div className="flex items-center text-gray-300 bg-white/5 p-4 rounded-2xl border border-white/10">
+              <Truck className="w-6 h-6 text-emerald-400 mr-3" />
               <div>
-                <p className="font-semibold text-gray-900 text-sm">Free Shipping</p>
+                <p className="font-semibold text-white text-sm">Free Shipping</p>
                 <p className="text-xs">On orders over $50</p>
               </div>
             </div>
@@ -169,20 +169,20 @@ export default function ProductDetailPage() {
 
           <div className="flex items-center gap-6 mt-auto">
             {/* Quantity Selector */}
-            <div className="flex items-center border-2 border-gray-200 rounded-xl overflow-hidden h-14 bg-white">
+            <div className="flex items-center border border-white/20 rounded-xl overflow-hidden h-14 bg-white/5">
               <button 
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="w-12 h-full flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                className="w-12 h-full flex items-center justify-center text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
                 disabled={outOfStock}
               >
                 -
               </button>
-              <div className="w-12 h-full flex items-center justify-center font-semibold text-gray-900 border-x-2 border-gray-200">
+              <div className="w-12 h-full flex items-center justify-center font-semibold text-white border-x border-white/20">
                 {quantity}
               </div>
               <button 
                 onClick={() => setQuantity(Math.min(product.inventory?.quantity || 1, quantity + 1))}
-                className="w-12 h-full flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                className="w-12 h-full flex items-center justify-center text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
                 disabled={outOfStock}
               >
                 +
@@ -195,7 +195,7 @@ export default function ProductDetailPage() {
                 onClick={handleAddToCart}
                 disabled={outOfStock}
                 className={`flex-1 h-14 text-base font-bold rounded-xl shadow-lg transition-all active:scale-[0.98] ${
-                  outOfStock ? 'bg-gray-300' : 'bg-gray-900 hover:bg-gray-800 shadow-gray-500/25 text-white'
+                  outOfStock ? 'bg-gray-700 text-gray-400' : 'bg-[#E5E0D8] hover:bg-[#D5CFC4] text-gray-900'
                 }`}
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
@@ -211,7 +211,7 @@ export default function ProductDetailPage() {
                 }}
                 disabled={outOfStock}
                 className={`flex-1 h-14 text-base font-bold rounded-xl shadow-lg transition-all active:scale-[0.98] ${
-                  outOfStock ? 'bg-gray-300 hidden' : 'bg-gray-800 hover:bg-gray-700 shadow-gray-900/25 text-white'
+                  outOfStock ? 'bg-gray-700 hidden' : 'bg-emerald-600 hover:bg-emerald-500 text-white'
                 }`}
               >
                 Buy Now
@@ -221,10 +221,10 @@ export default function ProductDetailPage() {
             {/* Wishlist */}
             <button 
               onClick={handleToggleWishlist}
-              className={`w-14 h-14 rounded-xl flex items-center justify-center border-2 transition-all active:scale-[0.98] ${
+              className={`w-14 h-14 rounded-xl flex items-center justify-center border transition-all active:scale-[0.98] ${
                 inWishlist 
-                  ? 'border-red-100 bg-red-50 text-red-500' 
-                  : 'border-gray-200 bg-white text-gray-400 hover:border-gray-300 hover:text-gray-600'
+                  ? 'border-red-500/50 bg-red-500/20 text-red-400' 
+                  : 'border-white/20 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
               }`}
             >
               <Heart className={`w-6 h-6 ${inWishlist ? 'fill-current' : ''}`} />

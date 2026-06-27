@@ -118,6 +118,29 @@ export default function Navbar() {
             </Link>
           </div>
         </div>
+
+        {/* Search Bar (Mobile) */}
+        <form 
+          className="flex lg:hidden w-full pb-3 pt-1 relative"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const formData = new FormData(e.currentTarget);
+            const query = formData.get('search');
+            if (query) {
+              window.location.href = `/products?search=${encodeURIComponent(query.toString())}`;
+            }
+          }}
+        >
+          <input 
+            name="search"
+            type="text" 
+            placeholder="Search for products, categories..."
+            className="w-full pl-4 pr-10 py-2.5 rounded-l-xl text-white bg-white/10 placeholder-gray-300 focus:outline-none border border-white/20 focus:border-emerald-400 focus:bg-white/20 transition-all backdrop-blur-md text-sm"
+          />
+          <button type="submit" className="bg-emerald-500/20 hover:bg-emerald-500/40 border border-l-0 border-emerald-500/30 px-5 rounded-r-xl transition-colors flex items-center justify-center backdrop-blur-md group">
+            <Search className="w-5 h-5 text-emerald-400 group-hover:text-emerald-300" />
+          </button>
+        </form>
       </div>
 
       {/* Sub-navbar (Categories) */}
@@ -153,30 +176,6 @@ export default function Navbar() {
             </svg>
           </button>
         </div>
-
-        {/* Mobile Search */}
-        <form 
-          className="flex relative w-full"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const formData = new FormData(e.currentTarget);
-            const query = formData.get('search');
-            if (query) {
-              window.location.href = `/products?search=${encodeURIComponent(query.toString())}`;
-              setIsMenuOpen(false);
-            }
-          }}
-        >
-          <input 
-            name="search"
-            type="text" 
-            placeholder="Search products..."
-            className="w-full pl-4 pr-10 py-3 rounded-l-xl text-white bg-white/10 placeholder-gray-300 focus:outline-none border border-white/20 focus:border-emerald-400 focus:bg-white/20 transition-all backdrop-blur-md"
-          />
-          <button type="submit" className="bg-emerald-500/20 hover:bg-emerald-500/40 border border-l-0 border-emerald-500/30 px-4 rounded-r-xl transition-colors flex items-center justify-center backdrop-blur-md text-emerald-400">
-            <Search className="w-5 h-5" />
-          </button>
-        </form>
 
         {/* User Section */}
         <div className="flex flex-col gap-4 py-2 border-b border-white/10">

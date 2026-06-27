@@ -3,7 +3,7 @@
   "compilerOptions": {
     "jsx": "preserve",
     "module": "esnext",
-    "baseUrl": ".",
+    "moduleResolution": "bundler",
     "paths": {
       "@/*": ["./src/*"],
       "@shared/*": [

@@ -74,23 +74,7 @@ export default function ProductsPage() {
           <div className="col-span-full py-32 text-center bg-gray-50 rounded-2xl border border-dashed border-gray-300">
             <div className="text-4xl mb-4">🔍</div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">No products found</h3>
-            <p className="text-gray-500 mb-6">Your database is completely empty. Click below to populate it with 50 test products.</p>
-            <button 
-              onClick={async () => {
-                alert('Seeding database... This will take a few seconds. Please wait.');
-                try {
-                  const apiClient = (await import('@/lib/api')).default;
-                  await apiClient.get('/api/seed');
-                  alert('Database seeded successfully! Refreshing page...');
-                  window.location.reload();
-                } catch (e) {
-                  alert('Error seeding database. Make sure your API is running.');
-                }
-              }}
-              className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-lg transition-all active:scale-95"
-            >
-              Seed Database Now
-            </button>
+            <p className="text-gray-500">Check back later for new arrivals.</p>
           </div>
         )}
       </div>

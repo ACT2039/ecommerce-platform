@@ -133,7 +133,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="lg:hidden absolute top-16 left-0 w-full bg-gray-900 border-t border-white/10 shadow-2xl p-4 flex flex-col gap-4">
+        <div className="lg:hidden fixed inset-0 top-16 z-40 bg-gray-900 border-t border-white/10 shadow-2xl p-4 flex flex-col gap-4 overflow-y-auto">
           {/* Mobile Search */}
           <form 
             className="flex relative w-full mb-2"

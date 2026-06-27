@@ -17,16 +17,18 @@
   "engines": {
     "node": ">=18"
   },
-  "devDependencies": {
+  "dependencies": {
     "typescript": "5.2.2",
-    "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0",
-    "prisma": "^5.1.1",
     "@types/node": "^18.0.0",
     "@types/express": "^4.17.13",
     "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^9.0.2",
-    "@types/cookie-parser": "^1.4.3",
+    "@types/cookie-parser": "^1.4.3"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "prisma": "^5.1.1",
     "eslint": "^8.50.0",
     "prettier": "^3.0.0"
   }

@@ -1,0 +1,33 @@
+{
+  "name": "ecommerce-platform",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npx concurrently \"npm run dev -w apps/api\" \"npm run dev -w apps/web\"",
+    "build": "npm run build --workspaces --if-present",
+    "start": "npm run start --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "format": "npm run format --workspaces --if-present",
+    "postinstall": "prisma generate --schema=apps/api/prisma/schema.prisma"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "prisma": "^5.1.1",
+    "@types/node": "^18.0.0",
+    "@types/express": "^4.17.13",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/cookie-parser": "^1.4.3",
+    "eslint": "^8.50.0",
+    "prettier": "^3.0.0"
+  }
+}

@@ -7,8 +7,8 @@ const cookieOptions: any = {
     Date.now() + parseInt(process.env.JWT_COOKIE_EXPIRES_IN || '90') * 24 * 60 * 60 * 1000
   ),
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production',
-  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+  secure: process.env.NODE_ENV === 'production' || !!process.env.FRONTEND_URL,
+  sameSite: (process.env.NODE_ENV === 'production' || !!process.env.FRONTEND_URL) ? 'none' as const : 'lax' as const,
 };
 
 export const register = catchAsync(async (req: Request, res: Response) => {
@@ -39,8 +39,8 @@ export const logout = catchAsync(async (req: Request, res: Response) => {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    secure: process.env.NODE_ENV === 'production' || !!process.env.FRONTEND_URL,
+    sameSite: (process.env.NODE_ENV === 'production' || !!process.env.FRONTEND_URL) ? 'none' as const : 'lax' as const,
   });
   res.status(200).json({ status: 'success' });
 });

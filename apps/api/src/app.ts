@@ -37,8 +37,13 @@ export function createServer() {
   }));
 
   // CORS Policy (Dynamic for production vs local)
+  const frontendUrl = process.env.FRONTEND_URL?.replace(/\/$/, '') || '';
+  const allowedOrigins = process.env.NODE_ENV === 'production' 
+    ? [frontendUrl, `${frontendUrl}/`] 
+    : true;
+    
   app.use(cors({ 
-    origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : true, 
+    origin: allowedOrigins as any, 
     credentials: true 
   }));
 
